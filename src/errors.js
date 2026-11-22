@@ -47,3 +47,11 @@ export function errorHandler(err, req, res, next){
     
 
 }
+
+
+// What this means:
+
+// HttpError lets any route write throw new HttpError(400, "title is required"). The error handler turns that into a proper response, so each route doesn't have to send errors itself.
+// notFound has 2 arguments: it's a normal middleware.
+// errorHandler has 4 arguments: that's how Express knows it handles errors. If you delete next, it stops working, even though next is never used. This is a classic defense question.
+// For a 500 we send only "internal error". The real error is printed in your terminal, not shown to the user.
