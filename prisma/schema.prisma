@@ -15,36 +15,43 @@ datasource db {
 // ---------------------------------------------------------------------------
 
 model Story {
-  id Int @id @default(autoincrement())
-  // TODO: title      String
-  // TODO: summary    String   (default "")
-  // TODO: published  Boolean  (default false)
-  // TODO: createdAt  DateTime (default now())
-  // TODO: scenes     Scene[]  (the list of scenes in this story)
-  //
-  // TODO: THE START SCENE - pick ONE option and write down why in README.md:
-  //   Option A: startSceneId Int? + a second, NAMED relation to Scene
-  //   Option B: no field here; an isStart Boolean on Scene instead
+  id           Int      @id @default(autoincrement())
+  title        String
+  summary      String   @default("")
+  published    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  scenes       Scene[]  @relation("StoryScenes")
+
+  startSceneId Int?     @unique
+  startScene   Scene?   @relation("StoryStart", fields: [startSceneId], references: [id], onDelete: SetNull)
 }
 
+
 model Scene {
-  id Int @id @default(autoincrement())
-  // TODO: title     String
-  // TODO: body      String
-  // TODO: isEnding  Boolean (default false)
-  // TODO: storyId   Int  + relation to Story (choose onDelete!)
-  //
-  // TODO: a Choice touches Scene TWICE (from and to), so Scene needs two
-  //       lists of choices with NAMED relations, e.g.:
-  //       choicesOut Choice[] @relation("ChoiceFrom")
-  //       choicesIn  Choice[] @relation("ChoiceTo")
+  id         Int      @id @default(autoincrement())
+  title      String
+  body       String   @default("")
+  isEnding   Boolean  @default(false)
+
+  storyId    Int
+  story      Story    @relation("StoryScenes", fields: [storyId], references: [id], onDelete: Cascade)
+
+  startOf    Story?   @relation("StoryStart")
+
+  choicesOut Choice[] @relation("ChoiceFrom")
+  choicesIn  Choice[] @relation("ChoiceTo")
 }
 
 model Choice {
-  id Int @id @default(autoincrement())
-  // TODO: label        String   ("Light a match")
-  // TODO: fromSceneId  Int  + relation "ChoiceFrom" to Scene (onDelete?)
-  // TODO: toSceneId    Int  + relation "ChoiceTo"   to Scene (onDelete?)
+  id          Int    @id @default(autoincrement())
+  label       String
+
+  fromSceneId Int
+  fromScene   Scene  @relation("ChoiceFrom", fields: [fromSceneId], references: [id], onDelete: Cascade)
+
+  toSceneId   Int
+  toScene     Scene  @relation("ChoiceTo", fields: [toSceneId], references: [id], onDelete: Cascade)
 }
 
 // TODO (STEP 11): model Playthrough
