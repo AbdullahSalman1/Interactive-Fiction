@@ -1,0 +1,24 @@
+{
+  "name": "interactive-fiction",
+  "version": "1.0.0",
+  "description": "Write and play branching choose-your-own-adventure stories",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "setup": "prisma migrate deploy && prisma generate && node prisma/seed.js",
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test",
+    "db:migrate": "prisma migrate dev && prisma generate",
+    "db:studio": "prisma studio"
+  },
+  "dependencies": {
+    "@prisma/adapter-better-sqlite3": "^7.10.1",
+    "@prisma/client": "^7.10.1",
+    "dotenv": "^18.0.10",
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "prisma": "^7.10.1"
+  }
+}

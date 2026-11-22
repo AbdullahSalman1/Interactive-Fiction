@@ -1,0 +1,8 @@
+*.image
+*.ghost
+Enterprise Networks/
+
+node_modules/
+.env
+*.db
+*.db-journal

@@ -1,0 +1,52 @@
+// Prisma 7: NO "url" in the datasource block. The url is in prisma.config.mjs.
+// After every change to this file run:  npm run db:migrate
+// (it asks for a migration name, e.g. "init", "add-playthrough")
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// ---------------------------------------------------------------------------
+// STEP 4 (STEPS.md) - you write the fields. Hints are in the comments.
+// ---------------------------------------------------------------------------
+
+model Story {
+  id Int @id @default(autoincrement())
+  // TODO: title      String
+  // TODO: summary    String   (default "")
+  // TODO: published  Boolean  (default false)
+  // TODO: createdAt  DateTime (default now())
+  // TODO: scenes     Scene[]  (the list of scenes in this story)
+  //
+  // TODO: THE START SCENE - pick ONE option and write down why in README.md:
+  //   Option A: startSceneId Int? + a second, NAMED relation to Scene
+  //   Option B: no field here; an isStart Boolean on Scene instead
+}
+
+model Scene {
+  id Int @id @default(autoincrement())
+  // TODO: title     String
+  // TODO: body      String
+  // TODO: isEnding  Boolean (default false)
+  // TODO: storyId   Int  + relation to Story (choose onDelete!)
+  //
+  // TODO: a Choice touches Scene TWICE (from and to), so Scene needs two
+  //       lists of choices with NAMED relations, e.g.:
+  //       choicesOut Choice[] @relation("ChoiceFrom")
+  //       choicesIn  Choice[] @relation("ChoiceTo")
+}
+
+model Choice {
+  id Int @id @default(autoincrement())
+  // TODO: label        String   ("Light a match")
+  // TODO: fromSceneId  Int  + relation "ChoiceFrom" to Scene (onDelete?)
+  // TODO: toSceneId    Int  + relation "ChoiceTo"   to Scene (onDelete?)
+}
+
+// TODO (STEP 11): model Playthrough
+//   id, storyId (+ relation), currentSceneId (+ relation), createdAt
+//   Remember: Playthrough -> Scene is ANOTHER relation, think about names.

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interactive Fiction - Stories</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header><a href="/">Interactive Fiction</a></header>
+  <main>
+    <h1>Stories</h1>
+
+    <!-- STEP 6: a form to create a story -->
+    <form id="new-story-form">
+      <label>Title <input name="title" required></label>
+      <button type="submit">Create story</button>
+    </form>
+
+    <!-- The three states: loading / result / error -->
+    <p id="status" aria-live="polite"></p>
+    <ul id="story-list"></ul>
+  </main>
+  <script type="module" src="/js/pages/storyList.js"></script>
+</body>
+</html>

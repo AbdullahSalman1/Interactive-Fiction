@@ -1,0 +1,13 @@
+/* Plain is fine. "Ugly but clear beats pretty but broken." */
+body {
+  font-family: system-ui, sans-serif;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 16px;
+  line-height: 1.5;
+}
+
+.loading { color: #666; }
+.error   { color: #b00020; }
+
+/* TODO: style as you go */
