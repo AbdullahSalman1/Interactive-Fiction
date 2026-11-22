@@ -5,7 +5,7 @@
 //         throw new HttpError(409, "this story cannot be published", { unreachable, deadEnds });
 
 export class HttpError extends Error{
-    constructor(status,message,detaills){
+    constructor(status,message,details){
         super(message); // call Error constructor with message
         this.status = status; //e.g 400,404,409 
         this.details = details;
